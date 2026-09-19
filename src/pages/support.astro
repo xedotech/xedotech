@@ -1,0 +1,77 @@
+---
+import Base from "../layouts/Base.astro";
+import { app, site } from "../data/site";
+
+const sent = Astro.url.searchParams.get("sent") === "1";
+---
+
+<Base
+  title="Support | AgentOS"
+  description="Help with accounts, subscriptions, listings, marketplace publication, CRM, seller intake, and Scale questions."
+  path="/support"
+>
+  <article class="article wrap">
+    <h1>AgentOS Support</h1>
+    <p class="lede">
+      Accounts, subscriptions, listings, marketplace publication, CRM, seller
+      intake, media, the professional network, or Scale.
+    </p>
+
+    {sent && (
+      <p class="notice" role="status">
+        Message received. We will reply to the email you entered. For urgent
+        billing issues, call {site.phoneDisplay}.
+      </p>
+    )}
+
+    <div class="contact-grid" style="margin:1.4rem 0 2rem">
+      <a href={app.support}>Live support in the app <span>Open</span></a>
+      <a href={`tel:${site.phoneTel}`}>Call <span>{site.phoneDisplay}</span></a>
+      <a href={site.whatsapp} rel="noopener noreferrer">WhatsApp <span>Message</span></a>
+      <a href={app.abuse}>Report abuse <span>Trust and safety</span></a>
+    </div>
+
+    <div class="doc">
+      <h2>Write to us</h2>
+      <p>
+        Do not send passwords, API keys, or card numbers. For suspicious
+        marketplace content or harassment, use Report Abuse instead.
+      </p>
+      <form
+        class="form"
+        name="support"
+        method="POST"
+        action="/support?sent=1"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="support" />
+        <p class="hp">
+          <label>Leave empty <input name="bot-field" /></label>
+        </p>
+        <label>
+          Name
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>
+          Topic
+          <select name="topic" required>
+            <option value="product">Product</option>
+            <option value="billing">Billing</option>
+            <option value="scale">Scale</option>
+            <option value="other">Something else</option>
+          </select>
+        </label>
+        <label>
+          Message
+          <textarea name="message" required></textarea>
+        </label>
+        <button class="btn btn-ink" type="submit">Send message</button>
+      </form>
+    </div>
+  </article>
+</Base>

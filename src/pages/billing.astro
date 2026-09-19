@@ -1,0 +1,36 @@
+---
+import Legal from "../layouts/Legal.astro";
+---
+
+<Legal
+  title="Billing and subscriptions"
+  description="How AgentOS subscriptions, payments, renewals, and cancellations work."
+  path="/billing"
+  updated="Final professional legal review is required before unrestricted public launch."
+>
+  <h2>Subscriptions</h2>
+  <p>
+    Launch prices are Solo $94/month, Pro $169/month, Team $512/month, and
+    Brokerage $1,102/month. Major professional features are available across
+    paid plans; usage credits, automation volume, seats and other limits vary.
+    See <a href="/pricing">Pricing</a>.
+  </p>
+
+  <h2>Payment handling</h2>
+  <p>
+    Payment credentials are processed by the configured payment provider.
+    AgentOS does not store full card numbers. Professional access activates only
+    after a verified server-side payment or subscription webhook confirms the
+    subscription; a browser redirect alone does not activate access.
+  </p>
+
+  <h2>Renewal, cancellation and refunds</h2>
+  <p>
+    Subscription status is synchronized from verified provider events. Final
+    renewal timing, cancellation, refund, chargeback, tax and credit terms
+    remain subject to provider rules, applicable law and final legal review.
+    See the <a href="/refunds">Refund Policy</a>.
+  </p>
+
+  <p>Billing questions: <a href="/support">AgentOS Support</a>.</p>
+</Legal>

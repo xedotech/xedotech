@@ -1,0 +1,58 @@
+---
+import { app, site } from "../data/site";
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+
+const links = [
+  { href: "/#product", label: "Product", match: "/" },
+  { href: "/pricing", label: "Pricing", match: "/pricing" },
+  { href: "/support", label: "Support", match: "/support" },
+  { href: app.login, label: "Log in", match: "" },
+];
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="AgentOS home">
+    <img src="/brand/wordmark-on-dark.png" alt="AgentOS" width="220" height="68" />
+  </a>
+
+  <nav class="nav-desktop" aria-label="Primary">
+    {links.map((link) => (
+      <a href={link.href} aria-current={path === link.match ? "page" : undefined}>
+        {link.label}
+      </a>
+    ))}
+    <a class="btn header-cta" href={app.signup}>Get started</a>
+  </nav>
+
+  <details class="nav-mobile">
+    <summary>Menu</summary>
+    <nav class="nav-sheet" aria-label="Mobile">
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+      <a href="/#who">Who it's for</a>
+      <a href="/marketplace">Marketplace</a>
+      <a href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
+      <a class="btn" href={app.signup}>Get started</a>
+    </nav>
+  </details>
+</header>
+
+<script>
+  const menu = document.querySelector(".nav-mobile");
+  if (menu instanceof HTMLDetailsElement) {
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.open = false;
+      });
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") menu.open = false;
+    });
+  }
+</script>

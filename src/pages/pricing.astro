@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import { app, includedTools, plans } from "../data/site";
+---
+
+<Base
+  title="Pricing | AgentOS"
+  description="Solo $94, Pro $169, Team $512, Brokerage $1,102 per month. Same professional tools, different capacity."
+  path="/pricing"
+>
+  <article class="article wrap">
+    <h1>Choose the capacity that fits the practice.</h1>
+    <p class="lede">
+      Major professional tools sit on every paid plan. Plans differ by usage
+      credits, automation volume, seats, and limits.
+    </p>
+
+    <div class="plans" style="margin-top:1.6rem">
+      <input type="radio" name="plan" id="plan-solo" />
+      <input type="radio" name="plan" id="plan-pro" checked />
+      <input type="radio" name="plan" id="plan-team" />
+      <input type="radio" name="plan" id="plan-brokerage" />
+
+      <div class="plan-tabs">
+        {plans.map((plan) => (
+          <label for={`plan-${plan.id}`}>{plan.name}</label>
+        ))}
+      </div>
+
+      {plans.map((plan) => (
+        <article class={`plan-card plan-${plan.id}`}>
+          <p class="price">
+            ${plan.price.toLocaleString("en-US")}<span>/month</span>
+          </p>
+          <p class="lede">{plan.detail}</p>
+          <div class="btn-row" style="margin-top:1.15rem">
+            <a class="btn" href={app.signupPro}>Get started on {plan.name}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <h2 style="margin:2.4rem 0 0.7rem;font-size:1.6rem">What AgentOS includes</h2>
+    <p class="lede">
+      Availability depends on configuration and the provider you connect.
+    </p>
+    <ul class="included">
+      {includedTools.map((item) => <li>{item}</li>)}
+    </ul>
+    <p class="fine">
+      External provider services may need separate authorization, usage credits,
+      or provider approval. Paid access activates only after server-side payment
+      confirmation. High-cost provider capabilities may consume included
+      allowances or additional credits. MLS, IDX, CPAR, and Trestle connectivity
+      are not included in the current non-MLS launch.
+    </p>
+  </article>
+</Base>

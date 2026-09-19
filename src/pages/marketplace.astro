@@ -1,0 +1,52 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { app } from "../data/site";
+---
+
+<Legal
+  title="Marketplace and listings"
+  description="How public listings, seller submissions, and professional profiles work on AgentOS."
+  path="/marketplace"
+  updated="Final professional legal review is required before unrestricted public launch."
+>
+  <p>
+    AgentOS does not claim universal MLS access. MLS/IDX/CPAR/Trestle is
+    intentionally postponed until the required authorization is available.
+  </p>
+
+  <h2>Public inventory</h2>
+  <p>
+    Only listings explicitly marked public and published from permitted
+    inventory sources are eligible for the public marketplace. Private, demo,
+    withdrawn, expired, sold or off-market records are excluded by the public
+    API rules.
+  </p>
+  <p>
+    <a href={app.marketplace}>View the public marketplace</a>
+  </p>
+
+  <h2>Seller submissions</h2>
+  <p>
+    A seller submission is an intake record, not an automatic public listing and
+    not an MLS submission. A responsible professional must review and approve
+    publication.
+  </p>
+
+  <h2>Professional profiles</h2>
+  <p>
+    Professionals choose whether to publish a marketplace profile. Unless
+    explicitly stated otherwise, AgentOS does not represent self-published
+    credentials as independently verified.
+  </p>
+
+  <h2>Sponsored placement</h2>
+  <p>
+    Any paid marketplace placement must be visibly labeled Featured or Sponsored
+    and kept separate from organic ranking.
+  </p>
+
+  <p>
+    Report suspicious or harmful content through
+    <a href={app.abuse}>Report Abuse</a>.
+  </p>
+</Legal>

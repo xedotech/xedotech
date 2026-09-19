@@ -1,0 +1,270 @@
+---
+import Base from "../layouts/Base.astro";
+import { app, includedTools, plans, site } from "../data/site";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      logo: `${site.url}/brand/wordmark.png`,
+      description: site.description,
+      telephone: site.phoneTel,
+      sameAs: [site.x, site.instagram],
+    },
+    {
+      "@type": "WebSite",
+      name: site.name,
+      url: site.url,
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "AgentOS",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      offers: plans.map((plan) => ({
+        "@type": "Offer",
+        name: plan.name,
+        price: String(plan.price),
+        priceCurrency: "USD",
+      })),
+    },
+  ],
+};
+---
+
+<Base title={site.title} path="/">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="hero wrap">
+    <div>
+      <h1>Run the whole practice from one workspace.</h1>
+      <p class="lede">
+        CRM, calling, buyer matching, listing marketing, and client portals.
+        Built for agents, teams, and brokerages, not for browsing listings.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href={app.signup}>Get started</a>
+        <a class="btn btn-ghost" href="#product">See how a lead moves</a>
+      </div>
+    </div>
+
+    <aside class="sheet" aria-label="Example showing sheet">
+      <div class="sheet-top">
+        <span>Showing sheet</span>
+        <span>Thursday, 6:40 p.m.</span>
+      </div>
+      <h2>1428 Cedar Street, Unit 3</h2>
+      <p class="who">Maya Chen, buying with you</p>
+      <dl>
+        <div>
+          <dt>Budget</dt>
+          <dd>$640k–$720k</dd>
+        </div>
+        <div>
+          <dt>Must-haves</dt>
+          <dd>2 bed, elevator, walkable</dd>
+        </div>
+      </dl>
+      <p class="sheet-match">
+        <strong>Match 91.</strong> Budget, bedroom count, and Midtown line up.
+        Parking is a maybe.
+      </p>
+      <ol class="sheet-flow">
+        <li>Inquiry</li>
+        <li>Call done</li>
+        <li data-now="true">Showing requested</li>
+        <li>Your handoff</li>
+      </ol>
+    </aside>
+  </section>
+
+  <section class="band" id="who">
+    <div class="wrap">
+      <h2>Start from the side of the deal you're on.</h2>
+      <p class="lede">Buyers and sellers get a free portal. Professionals run the paid workspace.</p>
+
+      <div class="paths">
+        <input type="radio" name="who" id="who-pro" checked />
+        <input type="radio" name="who" id="who-buy" />
+        <input type="radio" name="who" id="who-sell" />
+
+        <div class="path-tabs" role="presentation">
+          <label for="who-pro">I work in real estate</label>
+          <label for="who-buy">I'm buying</label>
+          <label for="who-sell">I'm selling</label>
+        </div>
+
+        <article class="path-panel path-pro">
+          <h3>Professional account</h3>
+          <p>
+            For agents, brokers, and teams who manage clients, leads, listings,
+            marketing, follow-up, and transactions. Paid plans, except authorized
+            owner or pre-launch access.
+          </p>
+          <p class="path-note">
+            Not for someone buying or selling their own property.
+          </p>
+          <a class="btn" href={app.signupPro}>Get started as a professional</a>
+        </article>
+
+        <article class="path-panel path-buy">
+          <h3>Free buyer account</h3>
+          <p>
+            Track your search, message your agent, and follow showings and offers
+            in the client portal.
+          </p>
+          <a class="btn" href={app.signupBuyer}>Get started as a buyer</a>
+        </article>
+
+        <article class="path-panel path-sell">
+          <h3>Free seller account</h3>
+          <p>
+            Share property details, track inquiries, and follow the listing with
+            your agent.
+          </p>
+          <a class="btn" href={app.signupSeller}>Get started as a seller</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="product">
+    <div class="wrap">
+      <h2>From inquiry to a human handoff.</h2>
+      <p class="lede">
+        The assistant can call, text, and qualify. Every action writes back to the
+        CRM. You take the appointment.
+      </p>
+      <ol class="steps">
+        <li><b>1</b><span>Lead captured</span></li>
+        <li><b>2</b><span>Qualified</span></li>
+        <li><b>3</b><span>Follow-up prepared</span></li>
+        <li><b>4</b><span>Appointment or showing requested</span></li>
+        <li><b>5</b><span>Agent handoff</span></li>
+      </ol>
+      <p class="fine">
+        Calling, email, and SMS depend on consent, applicable law, plan allowances,
+        and the connected provider. Simulated outcomes stay separate from production
+        records.
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap practice">
+      <article>
+        <h2>Keep client work moving.</h2>
+        <p>
+          Pipelines, activity, tasks, listings, showing requests, the Seller
+          Portal, and buyer matching in one place.
+        </p>
+        <ul class="inventory">
+          <li>Configurable pipelines</li>
+          <li>Buyer and seller workflows</li>
+          <li>Tasks and follow-up</li>
+        </ul>
+      </article>
+      <article id="create">
+        <h2>Turn one listing into a campaign.</h2>
+        <p>
+          Visuals, Reels, captions, campaign plans, and property pages from
+          confirmed listing details.
+        </p>
+        <ul class="shot-list">
+          <li>Property media</li>
+          <li>Captions and campaign plan</li>
+          <li>Brand-aware pages</li>
+        </ul>
+      </article>
+      <article id="connect">
+        <h2>Pass work to people you trust.</h2>
+        <p>
+          Publish a profile, share protected client needs, manage referrals, and
+          message other AgentOS professionals privately.
+        </p>
+        <div class="referral">
+          <p>Jordan, Austin buyer, 3 bed under $780k, needs a listing agent in Denver.</p>
+          <p>Priya accepted the referral. Conversation stays inside the network.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>A marketplace only when you publish.</h2>
+      <p class="lede">
+        Public listings come from inventory you mark public, or from permitted
+        providers. Private CRM data, unpublished properties, messages, and seller
+        files stay in the workspace.
+      </p>
+      <a class="btn btn-ghost" href={app.marketplace}>Open the public marketplace</a>
+      <p class="fine">
+        Seller submissions need professional review. AgentOS is not an MLS.
+        MLS, IDX, CPAR, and Trestle connectivity are not in this launch.
+      </p>
+    </div>
+  </section>
+
+  <section class="band" id="pricing">
+    <div class="wrap">
+      <h2>Same tools. Different capacity.</h2>
+      <p class="lede">
+        Plans differ by credits, automation volume, seats, and limits. Paid access
+        turns on after payment is confirmed on the server.
+      </p>
+
+      <div class="plans">
+        <input type="radio" name="plan" id="plan-solo" />
+        <input type="radio" name="plan" id="plan-pro" checked />
+        <input type="radio" name="plan" id="plan-team" />
+        <input type="radio" name="plan" id="plan-brokerage" />
+
+        <div class="plan-tabs">
+          {plans.map((plan) => (
+            <label for={`plan-${plan.id}`}>{plan.name}</label>
+          ))}
+        </div>
+
+        {plans.map((plan) => (
+          <article class={`plan-card plan-${plan.id}`}>
+            <p class="price">
+              ${plan.price.toLocaleString("en-US")}<span>/month</span>
+            </p>
+            <p class="lede">{plan.blurb}</p>
+            <p class="fine">{plan.detail}</p>
+            <div class="btn-row" style="margin-top:1.15rem">
+              <a class="btn" href={app.signupPro}>Get started on {plan.name}</a>
+              <a class="btn btn-ghost" href="/pricing">Full plan notes</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <h3 style="margin:2rem 0 0.7rem;font-size:1.2rem">On every paid plan</h3>
+      <ul class="included">
+        {includedTools.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="contact">
+    <div class="wrap">
+      <h2>Talk to AgentOS.</h2>
+      <p class="lede">
+        Product, billing, or Scale questions go to support. Suspicious marketplace
+        content or harassment goes to Report Abuse. Never send passwords, API keys,
+        or card numbers through either form.
+      </p>
+      <div class="contact-grid">
+        <a href="/support">Support form <span>Write us</span></a>
+        <a href={`tel:${site.phoneTel}`}>Call <span>{site.phoneDisplay}</span></a>
+        <a href={site.whatsapp} rel="noopener noreferrer">WhatsApp <span>Message</span></a>
+        <a href={app.abuse}>Report abuse <span>Trust and safety</span></a>
+      </div>
+    </div>
+  </section>
+</Base>
