@@ -1,8 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
 import { app, site } from "../data/site";
-
-const sent = Astro.url.searchParams.get("sent") === "1";
 ---
 
 <Base
@@ -17,12 +15,10 @@ const sent = Astro.url.searchParams.get("sent") === "1";
       intake, media, the professional network, or Scale.
     </p>
 
-    {sent && (
-      <p class="notice" role="status">
-        Message received. We will reply to the email you entered. For urgent
-        billing issues, call {site.phoneDisplay}.
-      </p>
-    )}
+    <p class="notice" id="sentNotice" role="status" hidden>
+      Message received. We will reply to the email you entered. For urgent
+      billing issues, call {site.phoneDisplay}.
+    </p>
 
     <p class="phone"><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></p>
     <p>
@@ -72,4 +68,10 @@ const sent = Astro.url.searchParams.get("sent") === "1";
       <button class="btn" type="submit">Send message</button>
     </form>
   </article>
+
+  <script>
+    if (new URLSearchParams(location.search).get("sent") === "1") {
+      document.getElementById("sentNotice")?.removeAttribute("hidden");
+    }
+  </script>
 </Base>

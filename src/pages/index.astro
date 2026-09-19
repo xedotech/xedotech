@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { accounts, app, includedTools, plans, site, tools } from "../data/site";
+import { accounts, app, plans, site, tools } from "../data/site";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -110,8 +110,8 @@ const jsonLd = {
       ))}
     </div>
     <p class="fine">
-      Every paid plan can include {includedTools.slice(0, -1).join(", ")}, and
-      {includedTools[includedTools.length - 1].toLowerCase()}.
+      Every paid plan includes the same professional tools, with different
+      allowances.
     </p>
     <p>
       <a class="text-go" href="/pricing">Full plan notes</a>
