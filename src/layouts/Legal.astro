@@ -12,7 +12,7 @@ const { title, description, path, updated } = Astro.props;
 const pageTitle = `${title} | AgentOS`;
 ---
 
-<Base title={pageTitle} description={description} path={path} dock={false}>
+<Base title={pageTitle} description={description} path={path}>
   <article class="article wrap">
     <h1>{title}</h1>
     {updated && <p class="meta">{updated}</p>}

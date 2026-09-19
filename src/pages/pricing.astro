@@ -9,45 +9,29 @@ import { app, includedTools, plans } from "../data/site";
   path="/pricing"
 >
   <article class="article wrap">
-    <h1>Choose the capacity that fits the practice.</h1>
+    <h1>Capacity for the practice.</h1>
     <p class="lede">
       Major professional tools sit on every paid plan. Plans differ by usage
       credits, automation volume, seats, and limits.
     </p>
 
-    <div class="plans" style="margin-top:1.6rem">
-      <input type="radio" name="plan" id="plan-solo" />
-      <input type="radio" name="plan" id="plan-pro" checked />
-      <input type="radio" name="plan" id="plan-team" />
-      <input type="radio" name="plan" id="plan-brokerage" />
-
-      <div class="plan-tabs">
-        {plans.map((plan) => (
-          <label for={`plan-${plan.id}`}>{plan.name}</label>
-        ))}
-      </div>
-
+    <div class="rates">
       {plans.map((plan) => (
-        <article class={`plan-card plan-${plan.id}`}>
-          <p class="price">
-            ${plan.price.toLocaleString("en-US")}<span>/month</span>
-          </p>
-          <p class="lede">{plan.detail}</p>
-          <div class="btn-row" style="margin-top:1.15rem">
-            <a class="btn" href={app.signupPro}>Get started on {plan.name}</a>
-          </div>
-        </article>
+        <a class="rate" href={app.signupPro}>
+          <b>{plan.name}</b>
+          <strong>${plan.price.toLocaleString("en-US")} a month</strong>
+          <span>{plan.detail}</span>
+        </a>
       ))}
     </div>
 
-    <h2 style="margin:2.4rem 0 0.7rem;font-size:1.6rem">What AgentOS includes</h2>
-    <p class="lede">
-      Availability depends on configuration and the provider you connect.
+    <h2>What is included</h2>
+    <p>
+      Availability depends on configuration and the provider you connect. Every
+      paid plan can include {includedTools.slice(0, -1).join(", ")}, and{" "}
+      {includedTools[includedTools.length - 1].toLowerCase()}.
     </p>
-    <ul class="included">
-      {includedTools.map((item) => <li>{item}</li>)}
-    </ul>
-    <p class="fine">
+    <p class="lede">
       External provider services may need separate authorization, usage credits,
       or provider approval. Paid access activates only after server-side payment
       confirmation. High-cost provider capabilities may consume included

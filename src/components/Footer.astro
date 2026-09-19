@@ -3,37 +3,18 @@ import { app, site } from "../data/site";
 ---
 
 <footer class="site-footer">
-  <div class="wrap foot-grid">
-    <div>
-      <h2>Product</h2>
-      <ul>
-        <li><a href="/#product">How it works</a></li>
-        <li><a href="/pricing">Pricing</a></li>
-        <li><a href={app.marketplace}>Public marketplace</a></li>
-        <li><a href="/marketplace">Marketplace rules</a></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Help</h2>
-      <ul>
-        <li><a href="/support">Support</a></li>
-        <li><a href={app.abuse}>Report abuse</a></li>
-        <li><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></li>
-        <li><a href={site.whatsapp} rel="noopener noreferrer">WhatsApp</a></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Company</h2>
-      <ul>
-        <li><a href="/privacy">Privacy</a></li>
-        <li><a href="/terms">Terms</a></li>
-        <li><a href="/refunds">Refunds</a></li>
-        <li><a href="/billing">Billing</a></li>
-        <li><a href="/security">Security</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="wrap legal">
-    <p>© {new Date().getFullYear()} AgentOS. Not an MLS, brokerage, appraisal, legal, or financial service.</p>
-  </div>
+  <nav aria-label="Footer">
+    <a href="/pricing">Pricing</a>
+    <a href="/support">Support</a>
+    <a href={app.marketplace}>Marketplace</a>
+    <a href="/marketplace">Marketplace rules</a>
+    <a href={app.abuse}>Report abuse</a>
+    <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/refunds">Refunds</a>
+    <a href="/billing">Billing</a>
+    <a href="/security">Security</a>
+  </nav>
+  <p>© {new Date().getFullYear()} AgentOS. Not an MLS, brokerage, appraisal, legal, or financial service.</p>
 </footer>

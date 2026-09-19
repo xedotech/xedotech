@@ -8,28 +8,27 @@ interface Props {
 const { path } = Astro.props;
 
 const links = [
-  { href: "/", label: "Home", match: "/" },
-  { href: "/#product", label: "Product", match: "" },
-  { href: "/pricing", label: "Pricing", match: "/pricing" },
-  { href: "/support", label: "Support", match: "/support" },
+  { href: "/", label: "Home" },
+  { href: "/#product", label: "Product" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/support", label: "Support" },
 ];
 ---
 
 <header class="site-header">
   <a class="brand" href="/" aria-label="AgentOS home">
-    <img src="/brand/wordmark-on-dark.png" alt="AgentOS" width="220" height="68" />
+    <img src="/brand/wordmark.png" alt="AgentOS" width="220" height="68" />
   </a>
 
   <nav class="nav-desktop" aria-label="Primary">
-    {links.filter((link) => link.href !== "/").map((link) => (
-      <a href={link.href} aria-current={path === link.match ? "page" : undefined}>
-        {link.label}
-      </a>
-    ))}
+    <a href="/#product" aria-current={path === "/" ? "page" : undefined}>Product</a>
+    <a href="/pricing" aria-current={path === "/pricing" ? "page" : undefined}>Pricing</a>
+    <a href="/support" aria-current={path === "/support" ? "page" : undefined}>Support</a>
     <a href={app.login}>Log in</a>
-    <a class="btn header-cta" href={app.signup}>Get started</a>
+    <a href={app.signup}>Get started</a>
   </nav>
 
+  <a class="header-go" href={app.signup}>Get started</a>
   <button type="button" class="menu-toggle" id="menuOpen" aria-haspopup="dialog" aria-controls="navDialog">
     Menu
   </button>
@@ -38,7 +37,7 @@ const links = [
 <dialog class="nav-dialog" id="navDialog" aria-label="Menu">
   <div class="nav-dialog-bar">
     <a class="brand" href="/" aria-label="AgentOS home">
-      <img src="/brand/wordmark-on-dark.png" alt="AgentOS" width="220" height="68" />
+      <img src="/brand/wordmark.png" alt="AgentOS" width="220" height="68" />
     </a>
     <button type="button" class="menu-toggle" data-close>Close</button>
   </div>
@@ -46,11 +45,9 @@ const links = [
     {links.map((link) => (
       <a href={link.href}>{link.label}</a>
     ))}
-    <a href="/#who">Who it's for</a>
-    <a href="/marketplace">Marketplace</a>
     <a href={app.login}>Log in</a>
     <a href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
-    <a class="btn" href={app.signup}>Get started</a>
+    <a href={app.signup}>Get started</a>
   </nav>
 </dialog>
 
