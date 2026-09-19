@@ -1,0 +1,22 @@
+---
+import { app, site } from "../data/site";
+---
+
+<footer class="site-footer">
+  <nav aria-label="Footer">
+    <a href="/pricing">Pricing</a>
+    <a href="/support">Support</a>
+    <a href={app.marketplace}>Marketplace</a>
+    <a href="/marketplace">Marketplace rules</a>
+    <a href={app.abuse}>Report abuse</a>
+    <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+    <a href={site.x} rel="noopener noreferrer">X</a>
+    <a href={site.instagram} rel="noopener noreferrer">Instagram</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/refunds">Refunds</a>
+    <a href="/billing">Billing</a>
+    <a href="/security">Security</a>
+  </nav>
+  <p>© {new Date().getFullYear()} AgentOS. Not an MLS, brokerage, appraisal, legal, or financial service.</p>
+</footer>

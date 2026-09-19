@@ -1,0 +1,136 @@
+---
+import Base from "../layouts/Base.astro";
+import { accounts, app, plans, site, tools } from "../data/site";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      logo: `${site.url}/brand/wordmark.png`,
+      description: site.description,
+      telephone: site.phoneTel,
+      sameAs: [site.x, site.instagram],
+    },
+    {
+      "@type": "WebSite",
+      name: site.name,
+      url: site.url,
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "AgentOS",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      offers: plans.map((plan) => ({
+        "@type": "Offer",
+        name: plan.name,
+        price: String(plan.price),
+        priceCurrency: "USD",
+      })),
+    },
+  ],
+};
+---
+
+<Base title={site.title} path="/">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="hero wrap">
+    <h1>How will you use AgentOS?</h1>
+    <p class="lede">
+      Pick the account that matches the work. CRM, calling, buyer matching,
+      listing marketing, and client portals live in one workspace — not a place
+      to browse listings.
+    </p>
+  </section>
+
+  <section class="wrap chooser" aria-label="Choose an account">
+    {accounts.map((account) => (
+      <a
+        class:list={["choice", account.featured && "choice-pro"]}
+        href={account.href}
+      >
+        <div class="choice-top">
+          <h2>{account.title}</h2>
+          {"badge" in account && account.badge ? <span class="badge">{account.badge}</span> : null}
+        </div>
+        <p>{account.body}</p>
+        {"note" in account && account.note ? <p class="choice-note">{account.note}</p> : null}
+        <span class="choice-cta">{account.cta}</span>
+      </a>
+    ))}
+  </section>
+
+  <section class="block wrap" id="product">
+    <h2>In the professional workspace</h2>
+    <dl class="tools">
+      {tools.map((tool) => (
+        <div>
+          <dt>{tool.name}</dt>
+          <dd>{tool.detail}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="fine">
+      Calling, email, and SMS depend on consent, law, plan allowances, and the
+      connected provider. Simulated outcomes stay separate from production
+      records. Seller submissions need professional review. AgentOS is not an
+      MLS. MLS, IDX, CPAR, and Trestle are not in this launch.
+    </p>
+  </section>
+
+  <section class="block wrap">
+    <h2>Nothing is public until you publish it.</h2>
+    <p>
+      The marketplace only shows listings you mark public, or records from
+      permitted providers. Private CRM data, unpublished properties, messages,
+      and seller files stay in the workspace.
+    </p>
+    <p>
+      <a class="text-go" href={app.marketplace}>Open the public marketplace</a>
+    </p>
+  </section>
+
+  <section class="block wrap" id="pricing">
+    <h2>Same tools. Different capacity.</h2>
+    <p class="lede">
+      Plans differ by credits, automation volume, seats, and limits. Paid access
+      turns on after payment is confirmed on the server.
+    </p>
+    <div class="rates">
+      {plans.map((plan) => (
+        <a class="rate" href={app.signupPro}>
+          <b>{plan.name}</b>
+          <strong>${plan.price.toLocaleString("en-US")} a month</strong>
+          <span>{plan.blurb}</span>
+        </a>
+      ))}
+    </div>
+    <p class="fine">
+      Every paid plan includes the same professional tools, with different
+      allowances.
+    </p>
+    <p>
+      <a class="text-go" href="/pricing">Full plan notes</a>
+    </p>
+  </section>
+
+  <section class="block wrap" id="contact">
+    <h2>Call or write</h2>
+    <p class="phone"><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></p>
+    <p>
+      <a class="text-go" href={site.whatsapp} rel="noopener noreferrer">WhatsApp</a>,
+      the <a class="text-go" href="/support">support form</a>, or
+      <a class="text-go" href={app.abuse}>Report abuse</a>. Never send passwords,
+      API keys, or card numbers.
+    </p>
+    <p>
+      <a class="text-go" href={site.x} rel="noopener noreferrer">X</a>
+      and
+      <a class="text-go" href={site.instagram} rel="noopener noreferrer">Instagram</a>.
+    </p>
+  </section>
+</Base>

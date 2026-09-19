@@ -1,0 +1,68 @@
+---
+import { app, site } from "../data/site";
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/#product", label: "Product" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/support", label: "Support" },
+];
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="AgentOS home">
+    <img src="/brand/wordmark.png" alt="AgentOS" width="220" height="68" />
+  </a>
+
+  <nav class="nav-desktop" aria-label="Primary">
+    <a href="/#product" aria-current={path === "/" ? "page" : undefined}>Product</a>
+    <a href="/pricing" aria-current={path === "/pricing" ? "page" : undefined}>Pricing</a>
+    <a href="/support" aria-current={path === "/support" ? "page" : undefined}>Support</a>
+    <a href={app.login}>Log in</a>
+    <a class="btn" href={app.signup}>Get started</a>
+  </nav>
+
+  <a class="header-go" href={app.signup}>Get started</a>
+  <button type="button" class="menu-toggle" id="menuOpen" aria-haspopup="dialog" aria-controls="navDialog">
+    Menu
+  </button>
+</header>
+
+<dialog class="nav-dialog" id="navDialog" aria-label="Menu">
+  <div class="nav-dialog-bar">
+    <a class="brand" href="/" aria-label="AgentOS home">
+      <img src="/brand/wordmark.png" alt="AgentOS" width="220" height="68" />
+    </a>
+    <button type="button" class="menu-toggle" data-close>Close</button>
+  </div>
+  <nav class="nav-sheet" aria-label="Mobile">
+    {links.map((link) => (
+      <a href={link.href}>{link.label}</a>
+    ))}
+    <a href={app.login}>Log in</a>
+    <a href={app.marketplace}>Marketplace</a>
+    <a href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
+    <a class="btn" href={app.signup}>Get started</a>
+  </nav>
+</dialog>
+
+<script>
+  const dialog = document.getElementById("navDialog");
+  const openBtn = document.getElementById("menuOpen");
+  if (dialog instanceof HTMLDialogElement && openBtn) {
+    const close = () => dialog.close();
+    openBtn.addEventListener("click", () => dialog.showModal());
+    dialog.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", close);
+    });
+    dialog.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", close);
+    });
+  }
+</script>

@@ -1,0 +1,38 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { app } from "../data/site";
+---
+
+<Legal
+  title="Security at AgentOS"
+  description="How AgentOS separates public and private data, verifies payments, and takes reports."
+  path="/security"
+  updated="Final professional security and legal review remains part of launch governance."
+>
+  <p>
+    AgentOS uses authenticated workspace access, server-side provider secrets,
+    private object storage, verified payment webhooks, security headers, rate
+    limits and audit records around sensitive operations.
+  </p>
+
+  <h2>Public/private separation</h2>
+  <p>
+    Public listing and professional-profile endpoints return explicit public
+    fields. Private CRM, messages, unpublished listing data and private media
+    require authenticated access.
+  </p>
+
+  <h2>Payment integrity</h2>
+  <p>
+    Paid access is activated by verified server-side payment/subscription
+    events, not by a browser success page. Duplicate payment events are designed
+    to be processed idempotently.
+  </p>
+
+  <h2>Reporting a concern</h2>
+  <p>
+    Use <a href={app.abuse}>Report Abuse</a> for suspicious content or
+    trust-and-safety concerns, or <a href="/support">Support</a> for security
+    questions. Do not submit passwords, card details or API secrets.
+  </p>
+</Legal>

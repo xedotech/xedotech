@@ -1,0 +1,23 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  updated?: string;
+}
+
+const { title, description, path, updated } = Astro.props;
+const pageTitle = `${title} | AgentOS`;
+---
+
+<Base title={pageTitle} description={description} path={path}>
+  <article class="article wrap">
+    <h1>{title}</h1>
+    {updated && <p class="meta">{updated}</p>}
+    <div class="doc">
+      <slot />
+    </div>
+  </article>
+</Base>

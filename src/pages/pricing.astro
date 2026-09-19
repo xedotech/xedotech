@@ -1,0 +1,42 @@
+---
+import Base from "../layouts/Base.astro";
+import { app, includedTools, plans } from "../data/site";
+---
+
+<Base
+  title="Pricing | AgentOS"
+  description="Solo $94, Pro $169, Team $512, Brokerage $1,102 per month. Same professional tools, different capacity."
+  path="/pricing"
+>
+  <article class="article wrap">
+    <h1>Same tools. Different capacity.</h1>
+    <p class="lede">
+      Major professional tools sit on every paid plan. Plans differ by usage
+      credits, automation volume, seats, and limits.
+    </p>
+
+    <div class="rates">
+      {plans.map((plan) => (
+        <a class="rate" href={app.signupPro}>
+          <b>{plan.name}</b>
+          <strong>${plan.price.toLocaleString("en-US")} a month</strong>
+          <span>{plan.detail}</span>
+        </a>
+      ))}
+    </div>
+
+    <h2>What is included</h2>
+    <p>
+      Availability depends on configuration and the provider you connect. Every
+      paid plan can include {includedTools.slice(0, -1).join(", ")}, and{" "}
+      {includedTools[includedTools.length - 1].toLowerCase()}.
+    </p>
+    <p class="fine">
+      External provider services may need separate authorization, usage credits,
+      or provider approval. Paid access activates only after server-side payment
+      confirmation. High-cost provider capabilities may consume included
+      allowances or additional credits. MLS, IDX, CPAR, and Trestle connectivity
+      are not included in the current non-MLS launch.
+    </p>
+  </article>
+</Base>
