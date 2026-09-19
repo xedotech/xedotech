@@ -23,6 +23,65 @@ export const app = {
   abuse: `${site.app}/report-abuse`,
 } as const;
 
+export const accounts = [
+  {
+    id: "professional",
+    title: "I'm a Real Estate Professional",
+    body: "For agents, brokers, and real-estate teams who manage clients, leads, listings, marketing, follow-up, and transactions.",
+    note: "This account is for people who work professionally in real estate — not someone buying or selling their own property. Professional accounts use paid plans, except authorized owner or pre-launch access.",
+    href: app.signupPro,
+    cta: "Get started as a professional",
+    featured: true,
+  },
+  {
+    id: "buyer",
+    title: "I'm Buying a Property",
+    body: "Find properties, save favorites, contact professionals, ask questions, and schedule showings.",
+    href: app.signupBuyer,
+    cta: "Free buyer account",
+    badge: "Free",
+  },
+  {
+    id: "seller",
+    title: "I'm Selling a Property",
+    body: "Share the property, manage inquiries, and connect with professionals who can help you sell.",
+    href: app.signupSeller,
+    cta: "Free seller account",
+    badge: "Free",
+  },
+] as const;
+
+export const tools = [
+  {
+    name: "CRM",
+    detail: "Configurable pipelines, activity history, tasks, and follow-up. Every client stays in one place.",
+  },
+  {
+    name: "Calling",
+    detail: "Two-way voice and SMS, with every action written back to the CRM.",
+  },
+  {
+    name: "Buyer matching",
+    detail: "Score buyers against budget, must-haves, and location — explained in plain language.",
+  },
+  {
+    name: "Listings and showings",
+    detail: "Showing requests, the Seller Portal, and listing preparation after professional review.",
+  },
+  {
+    name: "Campaigns",
+    detail: "Visuals, captions, campaign plans, and property pages from a confirmed listing.",
+  },
+  {
+    name: "Referrals",
+    detail: "A Denver need from an Austin buyer goes to a professional you trust, not a forwarded email.",
+  },
+  {
+    name: "Marketplace",
+    detail: "Only listings you mark public, or records from permitted providers. Private CRM data stays in the workspace.",
+  },
+] as const;
+
 export const plans = [
   {
     id: "solo",

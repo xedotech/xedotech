@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { app, includedTools, plans, site } from "../data/site";
+import { accounts, app, includedTools, plans, site, tools } from "../data/site";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -39,90 +39,64 @@ const jsonLd = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
   <section class="hero wrap">
-    <p class="address">
-      <span class="num">1428</span>
-      <span class="street">Cedar Street</span>
-    </p>
-    <div class="story">
-      <p>
-        Thursday evening. Maya Chen is buying with you. $640k to $720k, two
-        bedrooms, elevator, walkable. Match 91. The call is done. You confirm
-        6:40.
-      </p>
-      <h1 class="pitch">
-        AgentOS is the workspace for the rest of the practice: CRM, calling,
-        matching, marketing, and client portals.
-      </h1>
-      <a class="btn" href={app.signup}>Get started</a>
-    </div>
-  </section>
-
-  <section class="chapter wrap" id="who">
-    <h2>Professionals run the paid workspace.</h2>
-    <p>
-      Agents, brokers, and teams use AgentOS for clients, leads, listings,
-      marketing, follow-up, and transactions. This account is not for someone
-      buying or selling their own property. Paid plans, except authorized owner
-      or pre-launch access.
-    </p>
-    <a class="btn" href={app.signupPro}>Get started as a professional</a>
-    <p class="else">
-      Buying with an agent? <a class="text-go" href={app.signupBuyer}>Free buyer account</a>
-    </p>
-    <p class="else">
-      Selling with an agent? <a class="text-go" href={app.signupSeller}>Free seller account</a>
+    <h1>How will you use AgentOS?</h1>
+    <p class="lede">
+      Pick the account that matches the work. CRM, calling, buyer matching,
+      listing marketing, and client portals live in one workspace — not a place
+      to browse listings.
     </p>
   </section>
 
-  <section class="chapter wrap" id="product">
-    <h2>A lead does not sit in an inbox.</h2>
-    <p class="mute">
-      The assistant can call, text, and qualify. Every action writes back to the
-      CRM. You take the appointment.
-    </p>
-    <div class="flow">
-      <p>The lead is captured.</p>
-      <p>It is qualified.</p>
-      <p>Follow-up is prepared.</p>
-      <p>A showing or appointment is requested.</p>
-      <p>You take the handoff.</p>
-    </div>
-    <p class="mute">
-      Calling, email, and SMS depend on consent, applicable law, plan allowances,
-      and the connected provider. Simulated outcomes stay separate from production
-      records.
+  <section class="wrap chooser" aria-label="Choose an account">
+    {accounts.map((account) => (
+      <a
+        class:list={["choice", account.featured && "choice-pro"]}
+        href={account.href}
+      >
+        <div class="choice-top">
+          <h2>{account.title}</h2>
+          {"badge" in account && account.badge ? <span class="badge">{account.badge}</span> : null}
+        </div>
+        <p>{account.body}</p>
+        {"note" in account && account.note ? <p class="choice-note">{account.note}</p> : null}
+        <span class="choice-cta">{account.cta}</span>
+      </a>
+    ))}
+  </section>
+
+  <section class="block wrap" id="product">
+    <h2>In the professional workspace</h2>
+    <dl class="tools">
+      {tools.map((tool) => (
+        <div>
+          <dt>{tool.name}</dt>
+          <dd>{tool.detail}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="fine">
+      Calling, email, and SMS depend on consent, law, plan allowances, and the
+      connected provider. Simulated outcomes stay separate from production
+      records. Seller submissions need professional review. AgentOS is not an
+      MLS. MLS, IDX, CPAR, and Trestle are not in this launch.
     </p>
   </section>
 
-  <section class="chapter wrap" id="create">
-    <h2>Keep the file moving, then turn the listing into a campaign.</h2>
-    <p>
-      Pipelines, activity, tasks, listings, showing requests, the Seller Portal,
-      and buyer matching stay in one place. From confirmed listing details you
-      can prepare visuals, captions, campaign plans, and property pages.
-    </p>
-    <p>
-      When a client needs another market, you pass a protected note through the
-      network. Jordan in Austin needs a Denver listing agent. Priya takes the
-      referral. The conversation stays inside AgentOS.
-    </p>
-  </section>
-
-  <section class="chapter wrap">
+  <section class="block wrap">
     <h2>Nothing is public until you publish it.</h2>
     <p>
       The marketplace only shows listings you mark public, or records from
       permitted providers. Private CRM data, unpublished properties, messages,
-      and seller files stay in the workspace. Seller submissions need
-      professional review. AgentOS is not an MLS, and MLS, IDX, CPAR, and
-      Trestle connectivity are not in this launch.
+      and seller files stay in the workspace.
     </p>
-    <a class="text-go" href={app.marketplace}>Open the public marketplace</a>
+    <p>
+      <a class="text-go" href={app.marketplace}>Open the public marketplace</a>
+    </p>
   </section>
 
-  <section class="chapter wrap" id="pricing">
+  <section class="block wrap" id="pricing">
     <h2>Same tools. Different capacity.</h2>
-    <p class="mute">
+    <p class="lede">
       Plans differ by credits, automation volume, seats, and limits. Paid access
       turns on after payment is confirmed on the server.
     </p>
@@ -135,22 +109,28 @@ const jsonLd = {
         </a>
       ))}
     </div>
-    <p>
-      Every paid plan can include {includedTools.slice(0, -1).join(", ")}, and{" "}
+    <p class="fine">
+      Every paid plan can include {includedTools.slice(0, -1).join(", ")}, and
       {includedTools[includedTools.length - 1].toLowerCase()}.
     </p>
-    <a class="text-go" href="/pricing">Full plan notes</a>
+    <p>
+      <a class="text-go" href="/pricing">Full plan notes</a>
+    </p>
   </section>
 
-  <section class="chapter wrap" id="contact">
-    <h2>Call or write.</h2>
+  <section class="block wrap" id="contact">
+    <h2>Call or write</h2>
     <p class="phone"><a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a></p>
     <p>
-      <a class="text-go" href={site.whatsapp} rel="noopener noreferrer">WhatsApp</a> or
-      the <a class="text-go" href="/support">support form</a>. Use
-      <a class="text-go" href={app.abuse}>Report abuse</a> for suspicious
-      marketplace content or harassment. Never send passwords, API keys, or card
-      numbers.
+      <a class="text-go" href={site.whatsapp} rel="noopener noreferrer">WhatsApp</a>,
+      the <a class="text-go" href="/support">support form</a>, or
+      <a class="text-go" href={app.abuse}>Report abuse</a>. Never send passwords,
+      API keys, or card numbers.
+    </p>
+    <p>
+      <a class="text-go" href={site.x} rel="noopener noreferrer">X</a>
+      and
+      <a class="text-go" href={site.instagram} rel="noopener noreferrer">Instagram</a>.
     </p>
   </section>
 </Base>

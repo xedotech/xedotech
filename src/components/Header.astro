@@ -25,7 +25,7 @@ const links = [
     <a href="/pricing" aria-current={path === "/pricing" ? "page" : undefined}>Pricing</a>
     <a href="/support" aria-current={path === "/support" ? "page" : undefined}>Support</a>
     <a href={app.login}>Log in</a>
-    <a href={app.signup}>Get started</a>
+    <a class="btn" href={app.signup}>Get started</a>
   </nav>
 
   <a class="header-go" href={app.signup}>Get started</a>
@@ -46,8 +46,9 @@ const links = [
       <a href={link.href}>{link.label}</a>
     ))}
     <a href={app.login}>Log in</a>
+    <a href={app.marketplace}>Marketplace</a>
     <a href={`tel:${site.phoneTel}`}>Call {site.phoneDisplay}</a>
-    <a href={app.signup}>Get started</a>
+    <a class="btn" href={app.signup}>Get started</a>
   </nav>
 </dialog>
 

@@ -9,8 +9,6 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.2",
-    "@fontsource-variable/commissioner": "^5.2.8",
-    "@fontsource-variable/source-serif-4": "^5.2.8",
     "astro": "^5.13.7"
   }
 }
