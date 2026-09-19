@@ -50,7 +50,7 @@ const og = new URL("/brand/og.jpg", site.url).href;
     <meta name="twitter:image" content={og} />
     <slot name="head" />
   </head>
-  <body>
+  <body class:list={[{ "has-dock": dock }]}>
     <a class="skip" href="#main">Skip to content</a>
     <Header path={path} />
     <main id="main">
